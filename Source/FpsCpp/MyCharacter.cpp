@@ -23,6 +23,9 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent *PlayerInputCompone
 	PlayerInputComponent->BindAxis("MoveRight", this, &AMyCharacter::MoveRight);
 	PlayerInputComponent->BindAxis("Turn", this, &AMyCharacter::RotateYaw);
 	PlayerInputComponent->BindAxis("LookUp", this, &AMyCharacter::RotatePitch);
+
+	PlayerInputComponent->BindAction("Jump", EInputEvent::IE_Pressed, &AMyCharacter::StartJump);
+	PlayerInputComponent->BindAction("Jump", EInputEvent::IE_Released, &AMyCharacter::StopJump);
 }
 
 void AMyCharacter::MoveForward(float value)
@@ -47,8 +50,10 @@ void AMyCharacter::RotatePitch(float value)
 
 void AMyCharacter::StartJump()
 {
+	Jump();
 }
 
 void AMyCharacter::StopJump()
 {
+	StopJumping();
 }
