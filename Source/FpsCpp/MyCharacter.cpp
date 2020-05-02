@@ -1,5 +1,6 @@
 #include "MyCharacter.h"
 #include "Engine/World.h"
+#include "Components/InputComponent.h"
 
 AMyCharacter::AMyCharacter()
 {
@@ -24,8 +25,8 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent *PlayerInputCompone
 	PlayerInputComponent->BindAxis("Turn", this, &AMyCharacter::RotateYaw);
 	PlayerInputComponent->BindAxis("LookUp", this, &AMyCharacter::RotatePitch);
 
-	PlayerInputComponent->BindAction("Jump", EInputEvent::IE_Pressed, &AMyCharacter::StartJump);
-	PlayerInputComponent->BindAction("Jump", EInputEvent::IE_Released, &AMyCharacter::StopJump);
+	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &AMyCharacter::StartJump);
+	PlayerInputComponent->BindAction("Jump", IE_Released, this, &AMyCharacter::StopJump);
 }
 
 void AMyCharacter::MoveForward(float value)
