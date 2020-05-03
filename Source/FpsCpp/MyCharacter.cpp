@@ -1,23 +1,22 @@
 #include "MyCharacter.h"
 #include "Engine/World.h"
 #include "Components/InputComponent.h"
+#include "Camera/CameraComponent.h"
+#include "Components/SkeletalMeshComponent.h"
 
 AMyCharacter::AMyCharacter()
 {
-	PrimaryActorTick.bCanEverTick = true;
+	cam = CreateDefaultSubobject<UCameraComponent>("Camera");
+	cam->bUsePawnControlRotation = true;
+	cam->SetupAttachment(GetRootComponent());
+
+	arms = CreateDefaultSubobject<USkeletalMeshComponent>("Arms");
+	arms->SetupAttachment(cam);
+
+	gun = CreateDefaultSubobject<USkeletalMeshComponent>("Gun");
+	gun-> SetupAttachment(arms,"");
 }
 
-void AMyCharacter::BeginPlay()
-{
-	Super::BeginPlay();
-}
-
-// Called every frame
-void AMyCharacter::Tick(float DeltaTime)
-{
-}
-
-// Called to bind functionality to input
 void AMyCharacter::SetupPlayerInputComponent(UInputComponent *PlayerInputComponent)
 {
 	PlayerInputComponent->BindAxis("MoveForward", this, &AMyCharacter::MoveForward);

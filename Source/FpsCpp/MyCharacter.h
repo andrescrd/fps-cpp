@@ -15,13 +15,22 @@ public:
 	AMyCharacter();
 
 protected:
-	virtual void BeginPlay() override;
+	// virtual void BeginPlay() override;
 
 public:
+	UPROPERTY(VisibleAnywhere)
+	class UCameraComponent *cam;
+
+	UPROPERTY(VisibleAnywhere)
+	class USkeletalMeshComponent *arms;
+
+	UPROPERTY(VisibleAnywhere)
+	class USkeletalMeshComponent *gun;
+
 	UPROPERTY(EditAnywhere)
 	float rotationSpeed = 45;
 
-	virtual void Tick(float DeltaTime) override;
+	// virtual void Tick(float DeltaTime) override;
 	virtual void SetupPlayerInputComponent(class UInputComponent *PlayerInputComponent) override;
 
 	void MoveForward(float value);
