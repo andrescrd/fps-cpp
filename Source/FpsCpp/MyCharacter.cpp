@@ -14,7 +14,7 @@ AMyCharacter::AMyCharacter()
 	arms->SetupAttachment(cam);
 
 	gun = CreateDefaultSubobject<USkeletalMeshComponent>("Gun");
-	gun-> SetupAttachment(arms,"");
+	gun->SetupAttachment(arms, "GripPoint");
 }
 
 void AMyCharacter::SetupPlayerInputComponent(UInputComponent *PlayerInputComponent)
