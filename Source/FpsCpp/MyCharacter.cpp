@@ -26,6 +26,9 @@ void AMyCharacter::SetupPlayerInputComponent(UInputComponent *PlayerInputCompone
 
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &AMyCharacter::StartJump);
 	PlayerInputComponent->BindAction("Jump", IE_Released, this, &AMyCharacter::StopJump);
+
+	PlayerInputComponent->BindAction("Fire", IE_Pressed, this, &AMyCharacter::StartShoot);
+	PlayerInputComponent->BindAction("Fire", IE_Released, this, &AMyCharacter::StopShoot);
 }
 
 void AMyCharacter::MoveForward(float value)
@@ -56,4 +59,26 @@ void AMyCharacter::StartJump()
 void AMyCharacter::StopJump()
 {
 	StopJumping();
+}
+
+void AMyCharacter::StartShoot()
+{
+	firing = true;
+
+	FHitResult hitInfo;
+	bool hasHit = GetWorld()->LineTraceSingleByChannel(
+		hitInfo,
+		cam->GetComponentLocation(),
+		cam->GetComponentLocation() + cam->GetForwardVector() * 1000,
+		ECC_GameTraceChannel3);
+
+	if (hasHit && hitInfo.GetActor())
+	{
+		hitInfo.GetActor()->Destroy();
+	}
+}
+
+void AMyCharacter::StopShoot()
+{
+	firing = false;
 }

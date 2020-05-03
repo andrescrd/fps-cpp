@@ -27,6 +27,9 @@ public:
 	UPROPERTY(VisibleAnywhere)
 	class USkeletalMeshComponent *gun;
 
+	UPROPERTY(VisibleAnywhere)
+	bool firing;
+
 	UPROPERTY(EditAnywhere)
 	float rotationSpeed = 45;
 
@@ -39,4 +42,6 @@ public:
 	void RotatePitch(float value);
 	void StartJump();
 	void StopJump();
+	void StartShoot();
+	void StopShoot();
 };
