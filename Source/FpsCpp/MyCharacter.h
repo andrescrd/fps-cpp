@@ -12,16 +12,14 @@ class FPSCPP_API AMyCharacter : public ACharacter
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this character's properties
 	AMyCharacter();
 
 protected:
-	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 public:
-UPROPERTY(EditAnywhere)
-float rotationSpeed = 45;
+	UPROPERTY(EditAnywhere)
+	float rotationSpeed = 45;
 
 	virtual void Tick(float DeltaTime) override;
 	virtual void SetupPlayerInputComponent(class UInputComponent *PlayerInputComponent) override;
