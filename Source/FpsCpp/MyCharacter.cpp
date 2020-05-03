@@ -3,6 +3,8 @@
 #include "Components/InputComponent.h"
 #include "Camera/CameraComponent.h"
 #include "Components/SkeletalMeshComponent.h"
+#include "DrawDebugHelpers.h"
+#include "TimerManager.h"
 
 AMyCharacter::AMyCharacter()
 {
@@ -64,13 +66,25 @@ void AMyCharacter::StopJump()
 void AMyCharacter::StartShoot()
 {
 	firing = true;
+	GetWorldTimerManager().SetTimer(shootTimerHandle,this, &AMyCharacter::ShootTimer, 0.267, true);
+}
 
+void AMyCharacter::ShootTimer()
+{
 	FHitResult hitInfo;
 	bool hasHit = GetWorld()->LineTraceSingleByChannel(
 		hitInfo,
 		cam->GetComponentLocation(),
 		cam->GetComponentLocation() + cam->GetForwardVector() * 1000,
 		ECC_GameTraceChannel3);
+
+	DrawDebugLine(
+		GetWorld(),
+		cam->GetComponentLocation(),
+		cam->GetComponentLocation() + cam->GetForwardVector() * 1000,
+		FColor::Red,
+		false,
+		3);
 
 	if (hasHit && hitInfo.GetActor())
 	{
@@ -81,4 +95,5 @@ void AMyCharacter::StartShoot()
 void AMyCharacter::StopShoot()
 {
 	firing = false;
+	GetWorldTimerManager().ClearTimer(shootTimerHandle);
 }

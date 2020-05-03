@@ -18,6 +18,8 @@ protected:
 	// virtual void BeginPlay() override;
 
 public:
+	FTimerHandle shootTimerHandle;
+
 	UPROPERTY(VisibleAnywhere)
 	class UCameraComponent *cam;
 
@@ -43,5 +45,6 @@ public:
 	void StartJump();
 	void StopJump();
 	void StartShoot();
+	void ShootTimer();
 	void StopShoot();
 };
