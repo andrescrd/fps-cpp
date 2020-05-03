@@ -5,6 +5,7 @@
 #include "Components/SkeletalMeshComponent.h"
 #include "DrawDebugHelpers.h"
 #include "TimerManager.h"
+#include "Enemy.h"
 
 AMyCharacter::AMyCharacter()
 {
@@ -88,10 +89,14 @@ void AMyCharacter::ShootTimer()
 
 	if (hasHit && hitInfo.GetActor())
 	{
-		if (damages.Contains(hitInfo.BoneName))
+		AEnemy* enemy = Cast<AEnemy>(hitInfo.GetActor());
+
+		if (enemy && damages.Contains(hitInfo.BoneName))
 		{
-			float damage = damages[hitInfo.BoneName];
-			UE_LOG(LogTemp, Warning, TEXT("Damae: %f"),damage);
+			float damagePercent = damages[hitInfo.BoneName];
+			float totalDamage = baseDamage * damagePercent;
+			enemy->life -= totalDamage;
+			UE_LOG(LogTemp, Warning, TEXT("Damae: %f"),totalDamage);			
 		}
 		// hitInfo.GetActor()->Destroy();
 	}
