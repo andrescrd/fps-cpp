@@ -66,7 +66,7 @@ void AMyCharacter::StopJump()
 void AMyCharacter::StartShoot()
 {
 	firing = true;
-	GetWorldTimerManager().SetTimer(shootTimerHandle,this, &AMyCharacter::ShootTimer, 0.267, true);
+	GetWorldTimerManager().SetTimer(shootTimerHandle, this, &AMyCharacter::ShootTimer, 0.267, true);
 }
 
 void AMyCharacter::ShootTimer()
@@ -88,7 +88,12 @@ void AMyCharacter::ShootTimer()
 
 	if (hasHit && hitInfo.GetActor())
 	{
-		hitInfo.GetActor()->Destroy();
+		if (damages.Contains(hitInfo.BoneName))
+		{
+			float damage = damages[hitInfo.BoneName];
+			UE_LOG(LogTemp, Warning, TEXT("Damae: %f", damage));
+		}
+		// hitInfo.GetActor()->Destroy();
 	}
 }
 

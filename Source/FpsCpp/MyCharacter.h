@@ -20,20 +20,12 @@ protected:
 public:
 	FTimerHandle shootTimerHandle;
 
-	UPROPERTY(VisibleAnywhere)
-	class UCameraComponent *cam;
-
-	UPROPERTY(VisibleAnywhere)
-	class USkeletalMeshComponent *arms;
-
-	UPROPERTY(VisibleAnywhere)
-	class USkeletalMeshComponent *gun;
-
-	UPROPERTY(VisibleAnywhere)
-	bool firing;
-
-	UPROPERTY(EditAnywhere)
-	float rotationSpeed = 45;
+	UPROPERTY(VisibleAnywhere)	class UCameraComponent *cam;
+	UPROPERTY(VisibleAnywhere)	class USkeletalMeshComponent *arms;
+	UPROPERTY(VisibleAnywhere)	class USkeletalMeshComponent *gun;
+	UPROPERTY(VisibleAnywhere)	bool firing;
+	UPROPERTY(EditAnywhere)	float rotationSpeed = 45;
+	UPROPERTY(EditAnywhere)	TMap<FName, float> damages;
 
 	// virtual void Tick(float DeltaTime) override;
 	virtual void SetupPlayerInputComponent(class UInputComponent *PlayerInputComponent) override;
