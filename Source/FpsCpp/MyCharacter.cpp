@@ -91,7 +91,7 @@ void AMyCharacter::ShootTimer()
 		if (damages.Contains(hitInfo.BoneName))
 		{
 			float damage = damages[hitInfo.BoneName];
-			UE_LOG(LogTemp, Warning, TEXT("Damae: %f", damage));
+			UE_LOG(LogTemp, Warning, TEXT("Damae: %f"),damage);
 		}
 		// hitInfo.GetActor()->Destroy();
 	}
